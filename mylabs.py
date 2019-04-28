@@ -16,11 +16,17 @@ Version:              1.0.0
 
 import sys
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QToolBar, QAction
+from PyQt5.QtWidgets import QApplication, QMainWindow, QToolBar, \
+    QAction, QFileDialog
+
 from PyQt5.QtGui import QIcon
 
 class Mylabs(QMainWindow):
-
+    """
+    -----------------------------------------------------------------
+    Création de l'interface graphique et de ces fonctions d'analyses.
+    -----------------------------------------------------------------
+    """
     def __init__(self):
         # Initialisation de la fenêtre
         super().__init__()
@@ -36,6 +42,10 @@ class Mylabs(QMainWindow):
         # Barre de menu
         self.nouveau = QAction(QIcon("images/new.png"), "&Nouveau",
                                self)
+        self.nouveau.triggered.connect(self.new)
+        self.ouvrir = QAction(QIcon("images/ouvrir.png"), "&Ouvrir",
+                               self)
+        self.ouvrir.triggered.connect(self.open)
         self.quitter = QAction(QIcon("images/exit.png"),
                                "&Quitter", self)
         self.quitter.triggered.connect(self.close)
@@ -58,6 +68,7 @@ class Mylabs(QMainWindow):
         self.toolbar = QToolBar()
         self.toolbar.setOrientation(QtCore.Qt.Vertical)
         self.toolbar.addAction(self.nouveau)
+        self.toolbar.addAction(self.ouvrir)
         self.toolbar.addAction(self.recherche)
         self.toolbar.addAction(self.quitter)
         self.addToolBar(QtCore.Qt.LeftToolBarArea, self.toolbar)
@@ -65,8 +76,18 @@ class Mylabs(QMainWindow):
         # Affichage de la barre de status
         self.statusBar().showMessage("Prêt !!!")
     
+    def new(self):
+        # Création d'un nouveau fichier d'analyse vide
+        self.statusBar().showMessage("Création d'un nouveau fichier")
+    
+    def open(self):
+        # Ouverture d'une fenêtre de recherche de fichier
+        filename = QFileDialog.getOpenFileName(self, "open file", "*.*")
+        self.statusBar().showMessage("Chargement du fichier " + filename[0])
+    
     def search(self):
         print("Search")
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
