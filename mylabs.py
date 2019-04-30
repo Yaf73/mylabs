@@ -15,6 +15,7 @@ Version:              1.0.0
 """
 
 import sys
+from libs.fichier import Fichier
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QToolBar, \
     QAction, QFileDialog
@@ -30,6 +31,7 @@ class Mylabs(QMainWindow):
     def __init__(self):
         # Initialisation de la fenêtre
         super().__init__()
+        self.fichiers = list()
         self.initui()
         self.show()
 
@@ -84,6 +86,7 @@ class Mylabs(QMainWindow):
         # Ouverture d'une fenêtre de recherche de fichier
         filename = QFileDialog.getOpenFileName(self, "open file", "*.*")
         self.statusBar().showMessage("Chargement du fichier " + filename[0])
+        self.fichiers.append(Fichier(filename[0]))
     
     def search(self):
         print("Search")
