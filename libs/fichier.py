@@ -1,4 +1,4 @@
-# -*- coding: Latin-1 -*-
+# -*- coding: iso-8859-1 -*-
 
 
 """
@@ -40,14 +40,21 @@ class Fichier(object):
 
     def lire_txt(self):
         try:
-            data = pd.read_table(self.nom, encoding = CODE,\
+            self.data = pd.read_table(self.nom, encoding = CODE,\
                  na_values = NAVAL, sep = "\t")
+
         except:
             print("n'y arrive pas")
+        
         finally:
-            print(data.head())
+            print(self.data.head())
+    
+    def types_des_colonnes(self):
+        return self.data.dtypes
 
 
 
 if __name__ == "__main__":
-    file = Fichier("text.txt")
+    file = Fichier("C:/Users/Yanick/eclipse-workspace/data/donnees/export.txt")
+    file.lire_txt()
+    print(file.types_des_colonnes())
