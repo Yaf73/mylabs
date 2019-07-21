@@ -1,15 +1,15 @@
-# -*- coding: Latin-1 -*-
+# -*- coding: iso-8859-1 -*-
 
 
 """
 ---------------------------------------------------------------------
 Application Mylabs
 ---------------------------------------------------------------------
-Développement d'outils d'analyes statistiques en Python pour les
+DÃ©veloppement d'outils d'analyes statistiques en Python pour les
 laboratoires horlogers.
 ---------------------------------------------------------------------
-Programmé par:        Yanick Favre
-Date de création:     27 avril 2019
+ProgrammÃ© par:        Yanick Favre
+Date de crÃ©ation:     27 avril 2019
 Version:              1.0.0
 ---------------------------------------------------------------------
 """
@@ -25,18 +25,18 @@ from PyQt5.QtGui import QIcon
 class Mylabs(QMainWindow):
     """
     -----------------------------------------------------------------
-    Création de l'interface graphique et de ces fonctions d'analyses.
+    CrÃ©ation de l'interface graphique et de ces fonctions d'analyses.
     -----------------------------------------------------------------
     """
     def __init__(self):
-        # Initialisation de la fenêtre
+        # Initialisation de la fenÃªtre
         super().__init__()
         self.fichiers = list()
         self.initui()
         self.show()
 
     def initui(self):
-        # Paramétrage des données principale de la fenêtre
+        # ParamÃ©trage des donnÃ©es principale de la fenÃªtre
         self.setWindowTitle("Mylabs")
         self.setGeometry(8, 30, 800, 600)
         self.setWindowIcon(QIcon("images/histo.png"))
@@ -55,7 +55,7 @@ class Mylabs(QMainWindow):
                                  "&Recherche", self)
         self.recherche.triggered.connect(self.search)
         
-        # Création de la barre de menu
+        # CrÃ©ation de la barre de menu
         self.menubar = self.menuBar()
         self.fichier = self.menubar.addMenu("Fichier")
         self.fichier.addAction(self.nouveau) 
@@ -66,7 +66,7 @@ class Mylabs(QMainWindow):
         self.affichage = self.menubar.addMenu("Affichage")
         self.aide = self.menubar.addMenu("Aide ?")
         
-        # Création de la barre d'outils
+        # CrÃ©ation de la barre d'outils
         self.toolbar = QToolBar()
         self.toolbar.setOrientation(QtCore.Qt.Vertical)
         self.toolbar.addAction(self.nouveau)
@@ -76,14 +76,14 @@ class Mylabs(QMainWindow):
         self.addToolBar(QtCore.Qt.LeftToolBarArea, self.toolbar)
 
         # Affichage de la barre de status
-        self.statusBar().showMessage("Prêt !!!")
+        self.statusBar().showMessage("PrÃªt !!!")
     
     def new(self):
-        # Création d'un nouveau fichier d'analyse vide
-        self.statusBar().showMessage("Création d'un nouveau fichier")
+        # CrÃ©ation d'un nouveau fichier d'analyse vide
+        self.statusBar().showMessage("CrÃ©ation d'un nouveau fichier")
     
     def open(self):
-        # Ouverture d'une fenêtre de recherche de fichier
+        # Ouverture d'une fenÃªtre de recherche de fichier
         filename = QFileDialog.getOpenFileName(self, "open file", "*.*")
         self.statusBar().showMessage("Chargement du fichier " + filename[0])
         self.fichiers.append(Fichier(filename[0]))
